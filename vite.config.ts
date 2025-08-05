@@ -3,16 +3,15 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // Por padrão, o plugin react() processa apenas arquivos .tsx e .jsx.
-  // Precisamos instruir o Vite a também processar nossos arquivos de dados .ts que contêm sintaxe JSX.
-  // A configuração do esbuild abaixo força o loader 'tsx' para esses arquivos específicos.
-  esbuild: {
-    loader: 'tsx',
-    // The 'include' option for esbuild expects a regular expression.
-    // The previous array of globs was incorrect. This regex ensures that
-    // .ts files with JSX (like in src/data) are processed correctly.
-    include: /src\/.*\.(ts|tsx)$/,
-    exclude: [],
-  },
   plugins: [react()],
+  // The esbuild configuration has been moved to the top level. This is the correct syntax in Vite.
+  // The 'esbuild' option is not a valid property for the `react()` plugin, which caused the error.
+  esbuild: {
+    // The 'tsx' loader rule instructs Vite to process files with JSX.
+    // This is necessary for the files in `src/data` that use `React.createElement`.
+    loader: 'tsx',
+    // 'include' restricts this rule only to .ts files within the `src/data` folder,
+    // ensuring that other .ts files are not affected.
+    include: /src\/data\/.*\.ts$/,
+  },
 })
