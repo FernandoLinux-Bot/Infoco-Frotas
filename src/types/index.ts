@@ -14,14 +14,21 @@ export type UserMenuItemData =
     | { name: string; icon?: React.ReactElement; type?: 'item'; } 
     | { type: 'divider'; };
 
-export interface FormField {
+export type SingleFormField = {
     name: string;
     label: string;
     type: 'text' | 'number' | 'date' | 'email' | 'password';
     placeholder?: string;
     required?: boolean;
-    group?: FormField[];
 }
+
+export type GroupFormField = {
+    type: 'group';
+    name: string; // A unique key for the group
+    fields: SingleFormField[];
+}
+
+export type FormField = SingleFormField | GroupFormField;
 
 export interface PageConfig {
     title: string;
