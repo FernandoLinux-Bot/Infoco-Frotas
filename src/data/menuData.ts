@@ -2,10 +2,11 @@ import React from 'react';
 import { MenuItemData, UserMenuItemData } from '../types';
 import { 
     FolderIcon, Cog6ToothIcon, TruckIcon, GasPumpIcon, WrenchScrewdriverIcon, 
-    TireIcon, ChartPieIcon, LockClosedIcon, PaintBrushIcon, ArrowLeftOnRectangleIcon 
+    TireIcon, ChartPieIcon, LockClosedIcon, PaintBrushIcon, ArrowLeftOnRectangleIcon, BuildingOfficeIcon 
 } from '../components/icons';
 
 export const frotasMenuItems: MenuItemData[] = [
+    { name: 'Municípios', icon: <BuildingOfficeIcon /> },
     { name: 'Tabelas Básicas', icon: <FolderIcon />, submenu: [
         { name: 'Veículo e Equipamento' }, { name: 'Colaborador' }, { name: 'Fornecedor' }, { name: 'Veículo - Placa' }
     ]},
