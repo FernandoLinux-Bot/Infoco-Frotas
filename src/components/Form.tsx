@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FormField } from '../types';
+import { FormField, SingleFormField } from '../types';
 
 interface FormProps {
     fields: FormField[];
@@ -12,10 +12,16 @@ export const Form: React.FC<FormProps> = ({ fields, onSubmit, onCancel, initialD
     const [formData, setFormData] = useState<any>({});
 
     useEffect(() => {
-        const initialFormState = fields.reduce((acc, field) => {
-            acc[field.name] = initialData?.[field.label] ?? '';
-            return acc;
-        }, {} as any);
+        const initialFormState: any = {};
+        fields.forEach(field => {
+            if (field.type === 'group') {
+                field.fields.forEach(subField => {
+                    initialFormState[subField.name] = initialData?.[subField.label] ?? '';
+                });
+            } else {
+                initialFormState[field.name] = initialData?.[(field as SingleFormField).label] ?? '';
+            }
+        });
         setFormData(initialFormState);
     }, [fields, initialData]);
 
@@ -30,10 +36,10 @@ export const Form: React.FC<FormProps> = ({ fields, onSubmit, onCancel, initialD
     };
 
     const renderField = (field: FormField) => {
-        if (field.group) {
+        if (field.type === 'group') {
             return (
-                <div key={field.name} className="form-group form-group-inline">
-                    {field.group.map(subField => (
+                <div key={field.name} className="form-group-inline">
+                    {field.fields.map(subField => (
                          <div key={subField.name} className="form-control">
                             <label htmlFor={subField.name}>{subField.label}</label>
                             <input
@@ -50,17 +56,19 @@ export const Form: React.FC<FormProps> = ({ fields, onSubmit, onCancel, initialD
                 </div>
             )
         }
+        
+        const singleField = field as SingleFormField;
         return (
-            <div key={field.name} className="form-control">
-                <label htmlFor={field.name}>{field.label}</label>
+            <div key={singleField.name} className="form-control">
+                <label htmlFor={singleField.name}>{singleField.label}</label>
                 <input
-                    type={field.type}
-                    id={field.name}
-                    name={field.name}
-                    value={formData[field.name] || ''}
+                    type={singleField.type}
+                    id={singleField.name}
+                    name={singleField.name}
+                    value={formData[singleField.name] || ''}
                     onChange={handleChange}
-                    placeholder={field.placeholder}
-                    required={field.required}
+                    placeholder={singleField.placeholder}
+                    required={singleField.required}
                 />
             </div>
         );
