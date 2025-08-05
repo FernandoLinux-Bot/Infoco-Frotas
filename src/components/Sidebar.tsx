@@ -16,8 +16,8 @@ const SidebarNavItem: React.FC<{ item: MenuItemData; activeTab: string; handleOp
     const isParentActive = hasSubmenu && item.submenu?.some(sub => sub.name === activeTab);
 
     const handleClick = (e: React.MouseEvent) => {
+        e.preventDefault();
         if (hasSubmenu) {
-            e.preventDefault();
             setSubmenuOpen(prev => !prev);
         } else {
             handleOpenTab(item.name);
@@ -51,7 +51,7 @@ export const Sidebar: React.FC<{ menuItems: MenuItemData[]; activeTab: string; h
         <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
             <div className="sidebar-header">
                 <div className="logo-text">
-                    <h1>MUNICÍPIO DE URANDI</h1>
+                    <h1>MUNICÍPIO DE IBICARAÍ</h1>
                     <span>Ano de Trabalho - 2025</span>
                 </div>
                  <button className="play-btn" aria-label="Play"><PlayIcon /></button>
