@@ -20,6 +20,9 @@ const App = () => {
             setOpenTabs(prev => [...prev, tabName]);
         }
         setActiveTab(tabName);
+        if (window.innerWidth <= 1024) {
+            setSidebarOpen(false);
+        }
     };
 
     const handleCloseTab = (tabToClose: string) => {
