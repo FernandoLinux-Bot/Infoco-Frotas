@@ -1,8 +1,26 @@
 import React from 'react';
 import { PageConfig } from '../types';
-import { TruckIcon, FolderIcon, IdCardIcon, GasPumpIcon, RouteIcon, WrenchScrewdriverIcon, TireIcon } from '../components/icons';
+import { TruckIcon, FolderIcon, IdCardIcon, GasPumpIcon, RouteIcon, WrenchScrewdriverIcon, TireIcon, BuildingOfficeIcon } from '../components/icons';
 
 export const pageConfig: Record<string, PageConfig> = {
+    'Municípios': {
+        title: 'Municípios',
+        description: 'Gerencia o cadastro dos municípios.',
+        icon: <BuildingOfficeIcon />,
+        identifier: '100100',
+        breadcrumb: ['Geral', 'Municípios'],
+        columns: ['Nome do Município', 'UF', 'Código IBGE'],
+        data: [
+            { 'Nome do Município': 'Ibicaraí', 'UF': 'BA', 'Código IBGE': '2912909' },
+            { 'Nome do Município': 'Itabuna', 'UF': 'BA', 'Código IBGE': '2914804' },
+            { 'Nome do Município': 'Ilhéus', 'UF': 'BA', 'Código IBGE': '2913600' },
+        ],
+        formFields: [
+            { name: 'nome', label: 'Nome do Município*', type: 'text', required: true },
+            { name: 'uf', label: 'UF*', type: 'text', required: true },
+            { name: 'codigoIbge', label: 'Código IBGE', type: 'text' },
+        ]
+    },
     'Veículo e Equipamento': {
         title: 'Veículo e Equipamento',
         description: 'Gerencia o cadastro do veículo e suas características, tipo de combustível e condutor.',
@@ -17,14 +35,18 @@ export const pageConfig: Record<string, PageConfig> = {
         formFields: [
             { name: 'modelo', label: 'Modelo*', type: 'text', required: true },
             { name: 'categoria', label: 'Categoria*', type: 'text', required: true },
-            { name: 'placa', label: 'Placa', type: 'text', placeholder: '___-____' },
-            { name: 'prefixo', label: 'Prefixo', type: 'text' },
+            { type: 'group', name: 'placaGroup', fields: [
+                { name: 'placa', label: 'Placa', type: 'text', placeholder: '___-____' },
+                { name: 'prefixo', label: 'Prefixo', type: 'text' },
+            ]},
             { name: 'corPredominante', label: 'Cor Predominante', type: 'text' },
             { name: 'renavam', label: 'Renavam', type: 'text' },
             { name: 'chassis', label: 'Chassis', type: 'text' },
             { name: 'licenciamento', label: 'Licenciamento (CRLV)', type: 'text' },
-            { name: 'anoFabricacao', label: 'Ano Fabricação', type: 'number', placeholder: '2025' },
-            { name: 'anoModelo', label: 'Ano Modelo', type: 'number', placeholder: '2025' },
+            { type: 'group', name: 'anoGroup', fields: [
+                { name: 'anoFabricacao', label: 'Ano Fabricação', type: 'number', placeholder: '2025' },
+                { name: 'anoModelo', label: 'Ano Modelo', type: 'number', placeholder: '2025' },
+            ]},
         ]
     },
     'Colaborador': {
