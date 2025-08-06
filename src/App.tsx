@@ -4,7 +4,7 @@ import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { TabbedContent } from './components/TabbedContent';
 import { frotasMenuItems } from './data/menuData';
-import { LoginPage } from './components/LoginPage.tsx';
+import { LoginPage } from './components/LoginPage';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
