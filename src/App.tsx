@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { TabbedContent } from './components/TabbedContent';
 import { frotasMenuItems } from './data/menuData';
-import { LoginPage } from './components/LoginPage';
+import { LoginPage } from './components/LoginPage.tsx';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
